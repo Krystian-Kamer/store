@@ -17,3 +17,16 @@ export type Product = {
   id: number;
   attributes: Attributes;
 };
+
+export type Pagination = {
+  page: number;
+  pageCount: number;
+  pageSize: number;
+  total: number;
+};
+
+export type Meta = {
+  categories: string[];
+  companies: string[];
+  pagination: Pagination;
+};

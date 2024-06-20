@@ -3,7 +3,7 @@ import { type Product } from '../types';
 import { formatPrice } from '../utils';
 
 const ProductsGrid = () => {
-  const products = useLoaderData() as Product[];
+  const { products } = useLoaderData() as { products: Product[] };
   return (
     <div className='pt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4'>
       {products.map((product) => {
