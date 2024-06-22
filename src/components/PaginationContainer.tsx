@@ -1,19 +1,12 @@
 import { type Meta, type Pagination } from '../types';
+import { useLoaderData } from 'react-router-dom';
 
-const PaginationContainer = ({ meta }: { meta: Meta }) => {
-  const { pagination }: { pagination: Pagination } = meta;
-  const { page, pageCount } = pagination;
 
-  const buttons = Array(pageCount).fill('button');
+const PaginationContainer = () => {
+  const { meta } = useLoaderData() as {meta : Meta}
   return (
     <div className='join'>
-      {buttons.map((button, index) => {
-        return (
-          <button key={index} className='join-item btn'>
-            {index + 1}
-          </button>
-        );
-      })}
+      x
     </div>
   );
 };

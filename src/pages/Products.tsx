@@ -13,13 +13,12 @@ export const loader = async (data: LoaderFunctionArgs) => {
 };
 
 const Products = () => {
-  const { products } = useLoaderData() as { products: Product[] };
-  const { meta } = useLoaderData() as { meta: Meta };
+
   return (
     <>
       <Filters />
       <ProductsContainer />
-      <PaginationContainer meta = {meta} />
+      <PaginationContainer  />
     </>
   );
 };
