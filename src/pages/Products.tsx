@@ -1,6 +1,13 @@
-import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
+import {
+  LoaderFunctionArgs,
+  useLoaderData,
+} from 'react-router-dom';
 import { customFetch } from '../utils';
-import { Filters, PaginationContainer, ProductsContainer } from '../components';
+import {
+  Filters,
+  PaginationContainer,
+  ProductsContainer,
+} from '../components';
 import { type Product, type Meta } from '../types';
 
 const url = '/products';
@@ -13,12 +20,11 @@ export const loader = async (data: LoaderFunctionArgs) => {
 };
 
 const Products = () => {
-
   return (
     <>
       <Filters />
       <ProductsContainer />
-      <PaginationContainer  />
+      <PaginationContainer />
     </>
   );
 };

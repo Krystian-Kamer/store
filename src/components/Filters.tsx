@@ -43,7 +43,7 @@ const Filters = () => {
         size='select-sm'
       />
       <FormRange />
-      <FormCheckbox />
+      <FormCheckbox/>
       {/* buttons */}
       <button type='submit' className='btn btn-primary btn-sm uppercase'>
         search
