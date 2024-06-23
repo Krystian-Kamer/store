@@ -1,11 +1,17 @@
 import { Form, useLoaderData, Link } from 'react-router-dom';
 import FormInput from './FormInput';
 import FormSelect from './FormSelect';
+import FormRange from './FormRange';
+import FormCheckbox from './FormCheckbox';
+
 import { type Meta } from '../types';
 const Filters = () => {
   const { meta } = useLoaderData() as { meta: Meta };
   return (
-    <Form className='bg-base-200 rounded-md px-8 py-4 grid gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center'>
+    <Form
+      className='bg-base-200 rounded-md px-8 py-4 grid gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center'
+      method='GET'
+    >
       {/* search */}
       <FormInput
         type='search'
@@ -13,7 +19,7 @@ const Filters = () => {
         name='search'
         placeholder='name of item'
         size='input-sm'
-      ></FormInput>
+      />
       {/* form selects */}
       <FormSelect
         label='select category'
@@ -36,6 +42,8 @@ const Filters = () => {
         defaultValue='a-z'
         size='select-sm'
       />
+      <FormRange />
+      <FormCheckbox />
       {/* buttons */}
       <button type='submit' className='btn btn-primary btn-sm uppercase'>
         search
@@ -47,4 +55,3 @@ const Filters = () => {
   );
 };
 export default Filters;
-// ({ label, name, list, defaultValue, size }: Props)
