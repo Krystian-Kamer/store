@@ -1,18 +1,18 @@
 import { useState } from 'react';
-
+import { formatPrice } from '../utils/index';
 const FormRange = () => {
-  const [range, setRange] = useState<string>('1000');
+  const [range, setRange] = useState<string>('100000');
 
   return (
     <label htmlFor='price' className='form-control'>
       <div className='label'>
         <span className='label-text'>Select price</span>
-        <span className='label-text-alt'>${range}.00</span>
+        <span className='label-text-alt'>{formatPrice(range)}</span>
       </div>
       <input
         type='range'
         min={0}
-        max='1000'
+        max='100000'
         name='price'
         value={range}
         step='10'
