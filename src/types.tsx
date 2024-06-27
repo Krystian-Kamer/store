@@ -30,3 +30,12 @@ export type Meta = {
   companies: string[];
   pagination: Pagination;
 };
+
+export type Params = {
+  search?: string;
+  category?: string;
+  company?: string;
+  order?: string;
+  price?: string;
+  shipping?: string;
+};

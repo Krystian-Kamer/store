@@ -1,5 +1,4 @@
-
-const FormCheckbox = () => {
+const FormCheckbox = ({ defaultValue }: { defaultValue: string | undefined }) => {
   return (
     <label className='form-control items-center'>
       <div className='label'>
@@ -8,6 +7,7 @@ const FormCheckbox = () => {
       <input
         type='checkbox'
         name='shipping'
+        defaultValue={defaultValue}
         className='checkbox rounded-2xl checkbox-primary'
       />
     </label>
