@@ -39,3 +39,28 @@ export type Params = {
   price?: string;
   shipping?: string;
 };
+
+
+export type CartProduct = {
+  amount:number
+  cartID: string;
+  productID: number;
+  image: string;
+  title: string;
+  price :string
+  company: string;
+  pickedColor: string;
+};
+
+export type HigherProduct = {
+  product: CartProduct
+}
+
+export type CartState = {
+  cartItems: CartProduct[];
+  numItemsInCart: number;
+  cartTotal: number;
+  shipping: number;
+  tax: number;
+  orderTotal: number;
+};

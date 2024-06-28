@@ -1,26 +1,44 @@
-import { useLoaderData, LoaderFunctionArgs } from 'react-router-dom';
+import { useLoaderData, LoaderFunctionArgs, Link } from 'react-router-dom';
 import { formatPrice, customFetch, generateAmountOptions } from '../utils';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { type Attributes } from '../types';
+import { type Product, type CartProduct } from '../types';
+import { useAppDispatch } from '../hooks';
+import { addItem } from '../features/cart/cartSlice';
 
-export const loader = async (data: LoaderFunctionArgs): Promise<Attributes> => {
+export const loader = async (data: LoaderFunctionArgs): Promise<Product> => {
   const id = data.params.id as string;
   const response = await customFetch(`/products/${id}`);
-  const product = response.data.data;
-  const attributes: Attributes = product.attributes;
-  return attributes;
+  const product = response.data.data as Product;
+  return product;
 };
 
 const SingleProduct = () => {
-  const attributes = useLoaderData() as Attributes;
-  const { image, title, price, description, colors, company } = attributes;
+  const product = useLoaderData() as Product;
+  const { image, title, price, description, colors, company } =
+    product.attributes;
   const dollarsAmount = formatPrice(price);
 
   const [pickedColor, setPickedColor] = useState<string>(colors[0]);
   const [amount, setAmount] = useState<number>(1);
+
   const handleAmount = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setAmount(parseInt(e.target.value));
+  };
+  const cartProduct: CartProduct = {
+    cartID: product.id + pickedColor,
+    productID: product.id,
+    image,
+    title,
+    price,
+    company,
+    pickedColor,
+    amount,
+  };
+
+  const dispatch = useAppDispatch();
+
+  const addToCart = () => {
+    dispatch(addItem({ product: cartProduct }));
   };
 
   return (
@@ -91,7 +109,7 @@ const SingleProduct = () => {
             <div className='mt-10'>
               <button
                 className='btn btn-secondary btn-md uppercase'
-                onClick={() => console.log('add to bag')}
+                onClick={addToCart}
               >
                 Add to bag
               </button>
