@@ -6,7 +6,7 @@ export const customFetch = axios.create({
   baseURL: productionURL,
 });
 
-export const formatPrice = (price: string) => {
+export const formatPrice = (price: string | number) => {
   const dollarsAmount = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
