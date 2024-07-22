@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useAppSelector } from '../hooks';
 
 type Link = {
   id: number;
@@ -16,10 +17,12 @@ const links: Link[] = [
 ];
 
 const NavLinks = () => {
+  const { user } = useAppSelector((state) => state.user);
   return (
     <>
       {links.map((link) => {
         const { id, url, text } = link;
+        if ((url === 'checkout' || url === 'orders') && !user) return null;
         return (
           <li key={id}>
             <NavLink className='capitalize' to={url}>

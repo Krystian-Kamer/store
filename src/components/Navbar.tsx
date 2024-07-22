@@ -2,39 +2,13 @@ import { NavLink } from 'react-router-dom';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { NavLinks } from './';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from '../hooks';
-
-type Themes = {
-  winter: 'winter';
-  dracula: 'dracula';
-};
-
-type Theme = 'winter' | 'dracula';
-
-const themes: Themes = {
-  winter: 'winter',
-  dracula: 'dracula',
-};
+import { useAppSelector, useAppDispatch } from '../hooks';
+import { toggleTheme } from '../features/user/userSlice';
 
 const Navbar = () => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const localTheme = localStorage.getItem('theme');
-    return localTheme ? JSON.parse(localTheme) : themes.dracula;
-  });
-
-  const handleTheme = () => {
-    const { winter, dracula } = themes;
-    const newTheme = theme === winter ? dracula : winter;
-    setTheme(newTheme);
-  };
-
-  useEffect(() => {
-    localStorage.setItem('theme', JSON.stringify(theme));
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
   const numItemsInCart = useAppSelector((state) => state.cart.numItemsInCart);
+
+  const dispatch = useAppDispatch();
 
   return (
     <nav className='bg-base-200'>
@@ -65,7 +39,7 @@ const Navbar = () => {
         </div>
         <div className='navbar-end'>
           <label className='swap swap-rotate'>
-            <input type='checkbox' onChange={handleTheme} />
+            <input type='checkbox' onChange={() => dispatch(toggleTheme())} />
             <BsSunFill className='swap-on w-5 h-5' />
             <BsMoonFill className='swap-off w-5 h-5' />
           </label>

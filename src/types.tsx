@@ -40,21 +40,20 @@ export type Params = {
   shipping?: string;
 };
 
-
 export type CartProduct = {
-  amount:number
+  amount: number;
   cartID: string;
   productID: number;
   image: string;
   title: string;
-  price :string
+  price: string;
   company: string;
   pickedColor: string;
 };
 
 export type HigherProduct = {
-  product: CartProduct
-}
+  product: CartProduct;
+};
 
 export type CartState = {
   cartItems: CartProduct[];
@@ -64,3 +63,15 @@ export type CartState = {
   tax: number;
   orderTotal: number;
 };
+
+export type Themes = {
+  winter: 'winter';
+  dracula: 'dracula';
+};
+export type Theme = 'winter' | 'dracula';
+
+export type User = {
+  user: { username: string } | null
+  theme: Theme;
+};
+

@@ -3,7 +3,8 @@ import { CartItemsList, CartTotals, SectionTitle } from '../components';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  const user = null;
+    const { user } = useAppSelector((state) => state.user);
+
   const numItemsInCart: number = useAppSelector(
     (state) => state.cart.numItemsInCart
   );
