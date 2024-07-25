@@ -1,5 +1,27 @@
-import { Form, Link } from 'react-router-dom';
+import { ActionFunctionArgs, Form, Link, redirect } from 'react-router-dom';
 import { FormInput, SubmitBtn } from '../components/';
+import { customFetch } from '../utils';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log(data);
+  try {
+    const response = await customFetch.post('/auth/local/register', data);
+    toast.success('Account created succesfully');
+    return redirect('/login');
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage: string =
+        error?.response?.data?.error?.message ||
+        'please double check your crudentails';
+      toast.error(errorMessage);
+      return null;
+    }
+  }
+};
 
 const Register = () => {
   return (
@@ -37,7 +59,6 @@ const Register = () => {
             login
           </Link>
         </p>
-
       </Form>
     </section>
   );

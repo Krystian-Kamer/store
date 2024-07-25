@@ -1,10 +1,10 @@
 type Props = {
+  type: string;
   label: string;
   name: string;
-  type: string;
   defaultValue?: string;
   size?: string;
-  placeholder: string;
+  placeholder?: string;
 };
 
 const FormInput = ({ label, name, type, defaultValue, size, placeholder }: Props) => {

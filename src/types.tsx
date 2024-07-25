@@ -70,8 +70,23 @@ export type Themes = {
 };
 export type Theme = 'winter' | 'dracula';
 
+type UserInfo = {
+  username: string | undefined;
+  id?: number;
+  email?: string;
+  provider?: string;
+  confirmed?: boolean;
+  blocked?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export type User = {
-  user: { username: string } | null
+  user: UserInfo | null
   theme: Theme;
 };
 
+export type UserToken = {
+  jwt: string;
+  user: UserInfo;
+};

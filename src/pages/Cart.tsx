@@ -3,14 +3,24 @@ import { CartItemsList, CartTotals, SectionTitle } from '../components';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
-    const { user } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
 
   const numItemsInCart: number = useAppSelector(
     (state) => state.cart.numItemsInCart
   );
 
   if (numItemsInCart === 0) {
-    return <SectionTitle text='Your cart is empty' />;
+    return (
+      <>
+        <SectionTitle text='Your cart is empty' />
+        <Link
+          to='/products'
+          className='btn btn-primary mt-8 uppercase'
+        >
+          Back to Products
+        </Link>
+      </>
+    );
   }
   return (
     <>

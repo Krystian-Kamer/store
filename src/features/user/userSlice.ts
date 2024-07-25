@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import type { Themes, User } from '../../types';
+import type { Themes, User, UserToken } from '../../types';
 
 const themes: Themes = {
   winter: 'winter',
@@ -14,8 +14,13 @@ const getThemeFromLocalStorage = () => {
   return localTheme ? JSON.parse(localTheme) : themes.dracula;
 };
 
+const getUserFromLocalStorage = () => {
+  const localTheme: string | null = localStorage.getItem('user');
+  return localTheme ? JSON.parse(localTheme) : null;
+};
+
 const initialState: User = {
-  user: { username: 'Pitter Bratt' },
+  user: getUserFromLocalStorage(),
   theme: getThemeFromLocalStorage(),
 };
 
@@ -23,8 +28,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loginUser: (state, action) => {
-      console.log(state);
+    loginUser: (state, { payload }: PayloadAction<UserToken>) => {
+      const user = { ...payload.user, token: payload.jwt };
+      state.user = user;
+      localStorage.setItem('user', JSON.stringify(user));
     },
     logoutUser: (state) => {
       state.user = null;
