@@ -9,7 +9,7 @@ type Props = {
 
 const FormInput = ({ label, name, type, defaultValue, size, placeholder }: Props) => {
   return (
-    <label className='form-control'>
+    <label className='form-control capitalize'>
       <div className='label'>
         <span className='label-text'>{label}</span>
       </div>

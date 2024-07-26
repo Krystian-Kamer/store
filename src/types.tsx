@@ -79,6 +79,7 @@ type UserInfo = {
   blocked?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  token?: string;
 }
 
 export type User = {

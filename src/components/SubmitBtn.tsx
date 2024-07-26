@@ -7,7 +7,7 @@ const SubmitBtn = ({ text }: { text: string }) => {
   return (
     <button
       type='submit'
-      className='btn btn-primary btn-block'
+      className='btn btn-primary btn-block uppercase'
       disabled={isSubmitting}
     >
       {isSubmitting ? <span className='loading loading-spinner'></span> : text}
