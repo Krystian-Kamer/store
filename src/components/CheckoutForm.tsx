@@ -17,10 +17,10 @@ export const action =
     const info = {
       name,
       address,
-      chargeTotal: orderTotal,
-      orderTotal: formatPrice(orderTotal),
       cartItems,
       numItemsInCart,
+      chargeTotal: orderTotal,
+      orderTotal: formatPrice(orderTotal),
     };
     try {
       const response = await customFetch.post(
@@ -39,7 +39,8 @@ export const action =
       if (axios.isAxiosError(error)) {
         const errorMessage: string = 'There was an error placing your order';
         toast.error(errorMessage);
-        return error?.response?.status === 401
+        return error?.response?.status === 401 ||
+          error?.response?.status === 403
           ? redirect('/login')
           : null;
       }

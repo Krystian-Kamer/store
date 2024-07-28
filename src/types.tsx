@@ -26,8 +26,8 @@ export type Pagination = {
 };
 
 export type Meta = {
-  categories: string[];
-  companies: string[];
+  categories?: string[];
+  companies?: string[];
   pagination: Pagination;
 };
 
