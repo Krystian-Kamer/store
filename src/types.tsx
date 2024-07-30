@@ -38,6 +38,11 @@ export type Params = {
   order?: string;
   price?: string;
   shipping?: string;
+  page?: string;
+};
+
+export type OrderParams = {
+  page?: string;
 };
 
 export type CartProduct = {
@@ -70,7 +75,7 @@ export type Themes = {
 };
 export type Theme = 'winter' | 'dracula';
 
-type UserInfo = {
+export type UserInfo = {
   username: string | undefined;
   id?: number;
   email?: string;
@@ -80,10 +85,10 @@ type UserInfo = {
   createdAt?: string;
   updatedAt?: string;
   token?: string;
-}
+};
 
 export type User = {
-  user: UserInfo | null
+  user: UserInfo | null;
   theme: Theme;
 };
 

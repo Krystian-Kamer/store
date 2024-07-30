@@ -13,6 +13,6 @@ const HomeLayout = () => {
         {isPageLoading ? <Loading /> : <Outlet />}
       </section>
     </>
-  );
-};
-export default HomeLayout;
+  )
+}
+export default HomeLayout

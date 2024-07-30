@@ -1,7 +1,7 @@
 type Props = {
   label: string;
   name: string;
-  list: string[];
+  list?: string[];
   defaultValue?: string;
   size?: string;
 };
@@ -18,13 +18,14 @@ const FormSelect = ({ label, name, list, defaultValue, size }: Props) => {
         defaultValue={defaultValue}
         className={`select select-bordered ${size}`}
       >
-        {list.map((item) => {
-          return (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          );
-        })}
+        {list &&
+          list.map((item) => {
+            return (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            );
+          })}
       </select>
     </div>
   );

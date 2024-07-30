@@ -4,13 +4,23 @@ import { useState } from 'react';
 import { type Product, type CartProduct } from '../types';
 import { useAppDispatch } from '../hooks';
 import { addItem } from '../features/cart/cartSlice';
+import { QueryClient } from '@tanstack/react-query';
 
-export const loader = async (data: LoaderFunctionArgs): Promise<Product> => {
-  const id = data.params.id as string;
-  const response = await customFetch(`/products/${id}`);
-  const product = response.data.data as Product;
-  return product;
+const singleProductQuery = (id: string) => {
+  return {
+    queryKey: [`singleProduct`, id],
+    queryFn: () => customFetch(`/products/${id}`),
+  };
 };
+
+export const loader =
+  (queryClient: QueryClient) =>
+  async (data: LoaderFunctionArgs): Promise<Product> => {
+    const paramsId = data.params.id as string;
+    const response = await queryClient.ensureQueryData(singleProductQuery(paramsId));
+    const product = response.data.data as Product;
+    return product;
+  };
 
 const SingleProduct = () => {
   const product = useLoaderData() as Product;

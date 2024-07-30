@@ -1,13 +1,31 @@
 import { LoaderFunctionArgs, redirect, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { customFetch } from '../utils';
-import { OrdersList, SectionTitle, ComplexPaginationContainer } from '../components';
+import {
+  OrdersList,
+  SectionTitle,
+  ComplexPaginationContainer,
+} from '../components';
 import { AppStore } from '../store';
 import axios from 'axios';
-import { Meta } from '../types';
+import { Meta, OrderParams, UserInfo } from '../types';
+import { QueryClient } from '@tanstack/react-query';
+
+const ordersQuery = (params: OrderParams, user : UserInfo) => {
+  return {
+    queryKey: ['orders', user.username, params.page || '1'],
+    queryFn: () =>
+      customFetch('/orders', {
+        params,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }),
+  };
+};
 
 export const loader =
-  (store: AppStore) =>
+  (store: AppStore, queryClient: QueryClient) =>
   async ({ request }: LoaderFunctionArgs) => {
     const user = store.getState().user.user;
     if (!user) {
@@ -18,12 +36,7 @@ export const loader =
       ...new URL(request.url).searchParams.entries(),
     ]);
     try {
-      const response = await customFetch('/orders', {
-        params,
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await queryClient.ensureQueryData(ordersQuery(params, user));
       return { orders: response.data.data, meta: response.data.meta };
     } catch (error) {
       if (axios.isAxiosError(error)) {

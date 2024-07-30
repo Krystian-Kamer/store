@@ -8,6 +8,7 @@ import { type Meta, type Params } from '../types';
 const Filters = () => {
   const { meta } = useLoaderData() as { meta: Meta };
   const { params } = useLoaderData() as { params: Params };
+  console.log(params.shipping);
   const { search, category, company, order, price, shipping } = params;
 
   return (

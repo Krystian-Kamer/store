@@ -7,6 +7,6 @@ const FeaturedProducts = () => {
       <SectionTitle text='feeatured products' />
       <ProductsGrid />
     </div>
-  );
-};
-export default FeaturedProducts;
+  )
+}
+export default FeaturedProducts
