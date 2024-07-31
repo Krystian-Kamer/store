@@ -28,7 +28,6 @@ import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 import { action as checkoutAction } from './components/CheckoutForm';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { BsFileZipFill } from 'react-icons/bs';
 
 const queryClient = new QueryClient({
   defaultOptions: {

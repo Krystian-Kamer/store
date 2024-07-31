@@ -1,4 +1,4 @@
-import { useRouteError, Link } from 'react-router-dom';
+import { useRouteError } from 'react-router-dom';
 
 type RouteStatus = {
   status?: number;

@@ -6,9 +6,10 @@ import { customFetch, formatPrice } from '../utils';
 import { clearCart } from '../features/cart/cartSlice';
 import { AppStore } from '../store';
 import axios from 'axios';
+import { QueryClient } from '@tanstack/react-query';
 
 export const action =
-  (store: AppStore) =>
+  (store: AppStore, queryClient: QueryClient) =>
   async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
     const { name, address } = Object.fromEntries(formData);
